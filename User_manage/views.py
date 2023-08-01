@@ -251,6 +251,7 @@ def invoice_view(request, booking_id):
 
 
 #user profile crud operation for updating and deleting their account 
+@login_required(login_url='login')
 def Profileupdate(request):
     user = request.user
     if request.method == 'POST':
