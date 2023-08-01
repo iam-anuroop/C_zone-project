@@ -116,7 +116,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'backend',
         'USER': 'superuseradmin',
-        'PASSWORD': 'superuserpassword',
+        'PASSWORD': os.getenv('DATABASEPASS'),
         'HOST': 'backend.cbh1nahtwdgp.eu-north-1.rds.amazonaws.com',
         'PORT': '5432',
     }
