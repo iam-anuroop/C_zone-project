@@ -12,6 +12,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
 from django.contrib.auth import authenticate, login,logout
 from datetime import date
+from django.contrib.auth.decorators import login_required
 
 # for invoice download 
 from io import BytesIO
@@ -202,6 +203,7 @@ def resetpasswordorusername(request, uidb64, token):
 
 
 # bookings with out payment to show on kart
+@login_required(login_url='login')
 def Your_bookings(request):
 
     your_book = BookingDetails.objects.filter(user = request.user,is_paid =False)
