@@ -206,14 +206,18 @@ def resetpasswordorusername(request, uidb64, token):
 @login_required(login_url='login')
 def Your_bookings(request):
 
-    your_book = BookingDetails.objects.filter(user = request.user,is_paid =False)
-    booking = BookingDetails.objects.filter(user = request.user,is_paid =True)
+    try:
 
-    today_date = date.today()
-    booked_room_ids = BookingDetails.objects.filter(check_out_date__gt = today_date,is_paid = True).values_list("room_type_id",flat=True)
+        your_book = BookingDetails.objects.filter(user = request.user,is_paid =False)
+        booking = BookingDetails.objects.filter(user = request.user,is_paid =True)
+
+        today_date = date.today()
+        booked_room_ids = BookingDetails.objects.filter(check_out_date__gt = today_date,is_paid = True).values_list("room_type_id",flat=True)
 
 
-    return render(request,'pages/your_bookings.html',{'books':your_book,'booking':booking, 'booked_room_ids':booked_room_ids})
+        return render(request,'pages/your_bookings.html',{'books':your_book,'booking':booking, 'booked_room_ids':booked_room_ids})
+    except:
+        return HttpResponse('something went wrong')
 
 
 
