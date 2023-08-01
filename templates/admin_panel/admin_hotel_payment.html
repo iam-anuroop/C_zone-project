@@ -1,0 +1,59 @@
+{% extends 'admin_panel/admin_sidebar.html' %}
+{% block admincontent %}
+<table>
+    <thead>
+      <tr>
+        <th class='text-center' colspan='6'>Hotel Confirmation</th>
+    </tr>
+      <tr>
+        <th>hotel id</th>
+        <th>hotel name</th>
+        <th>Total paid</th>
+        <th>last_payment_date</th>
+        <th>pending_payment</th>
+        <th>Pay now</th>
+      </tr>
+    </thead>
+    <tbody>
+{% for hotel in hotels %}
+
+      <tr>
+        <td>{{hotel.hotel.id}}</td>
+        <td>{{hotel.hotel.hotel_name}}</td>
+        <td>{{hotel.total_paid}}</td>
+        <td>{{hotel.last_payment_date}}</td>
+        <td>{{hotel.pending_payment}}</td>
+        <td><a class='btn btn-primary'>pay now</a></td>
+
+      </tr>
+{% endfor %}
+
+    </tbody>
+  </table>
+
+  
+
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .image{
+      width: 150px;
+      height: 100px;
+    }
+  </style>
+
+
+{% endblock admincontent %}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class='main'>
+<div class='sidebar'>
+    <div class='heading'><h1>Admin panel</h1></div>
+    <a href='{% url 'adminpanel' %}' class='button'>Hotel requests</a>
+    <a href='{% url 'adminhotel' %}' class='button'>Hotels</a>
+    <a href='{% url 'adminhotelpayment' %}' class='button'>Hotel Payment</a>
+    <a href='{% url 'adminuser' %}' class='button'>Users</a>
+    <a href='{% url 'home' %}' class='button'>Exit</a>
+</div>
+<div class='content'>
+    {% block admincontent %}
+    
+    
+    {% endblock admincontent %}
+
+</div>
+</div>
+
+<style>
+    .content{
+        width:100%;
+        padding:50px;
+        background:lightgreen;
+    }
+
+    .main{
+        display:flex;
+    }
+    .sidebar{
+        width:300px;
+        background-color:black;
+        color:white;
+        display:flex;
+        flex-direction:column;
+        height:700px;
+        text-align:center;
+
+    }
+    .button:hover{
+        cursor:pointer;
+        text-decoration:none;
+        color:black;
+    }
+    .button{
+        background:white;
+        text-decoration:none;
+        color:black;
+        margin:5px;
+        height:40px;
+        border-radius:10px;
+        font-size:20px;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        
+
+    }
+</style>
+
+{% endblock content %}

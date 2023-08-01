@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+  .main_nav_div{
+    display: flex;
+    height: 80px;
+    background: rgba(18, 17, 17,0.6);
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 10px;
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  .nav_links{
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    text-decoration: none;
+    color: cyan;
+  }
+  .page_link{
+    color: whitesmoke;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bolder;
+    background-color: transparent;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+  }
+  .page_link:hover{
+    background-color: rgba(175, 241, 9, 0.5);
+    color: rgb(249, 246, 246);
+    text-decoration: none;
+    width: 70px;
+    height: 40px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .user_icons{
+    display: flex;
+    color: cyan;
+  }
+  .search_input{
+    background: transparent;
+    border: 2px solid cyan;
+    color: rgba(237, 252, 252, 0.6);
+    text-align: center;
+    border-radius: 8px;
+    width: 200px;
+    height: 30px;
+  }
+  .search_button{
+    border-radius: 5px;
+    background: transparent;
+    color: cyan;
+    border: 2px solid cyan;
+  }
+  .user_icons div:hover{
+    cursor: pointer;
+  }
+  .user_icon{
+    text-decoration: none;
+    color: cyan;
+  }
+  .c_zone_title{
+    color: yellow;
+  }
+</style>
+
+
+<nav class="main_nav_div">
+  <div class="c_zone_title">
+    <div><h3>C_zone</h3></div>
+  </div>
+  <div class="nav_links">
+    <a href="{% url 'home' %}" class="page_link">Hotels</a>
+    <a href="{% url 'rooms' %}" class="page_link">Rooms</a>
+    <form action="{% url 'search' %}" class="search_form">
+      <input type="search" name="search" class="search_input" placeholder="search...">
+      <button type="submit" class="search_button">Search</button>
+    </form>
+  </div>
+  <div class="user_icons">
+    <div class="user_icon"><a href='{% url 'registration' %}'><i class="fa-solid fa-user pl-4 pr-3"></i></a></div>
+    <div class="ellipsis_icon"><i class="openbtn fa-solid fa-ellipsis-vertical pl-3 pr-3" onclick="openNav()"></i></div>
+  </div>
+</nav>
+
+
+
+
+<!--sidebaaar-->
+<!--sidebaaar-->
+<!--sidebaaar-->
+<!--sidebaaar-->
+<!--sidebaaar-->
+<!--sidebaaar-->
+
+
+<style>
+  .sidepanel  {
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    height: auto;
+    top: 10px;
+    right: 10px;
+    background-color: whitesmoke;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    padding-bottom: 40px;
+    border-radius:10px;
+  }
+  
+  .sidepanel a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: grey;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidepanel a:hover {
+    color: whitesmoke;
+  }
+  .sidepanel_a:hover{
+    background: black;
+    margin: 5px;
+    border-radius: 5px;
+
+  }
+ 
+  .sidepanel .closebtn {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 30px;
+  }
+  
+  </style>
+  
+  <div id="mySidepanel" class="sidepanel">
+    <div class="closebtn_div" ><a href="javascript:void(0)" class="closebtn" title="close" onclick="closeNav()">×</a></div>
+    <div class="sidepanel_a" ><a href="{% url 'userprofile' %}">Profile</a></div>
+    <div class="sidepanel_a" ><a href="{% url 'yourbookings' %}">Your bookings</a></div>
+    <div class="sidepanel_a" ><a href="#">Contact</a></div>
+    <div class="sidepanel_a" ><a href="{% url 'hotellogin' %}">Hotel</a></div>
+  </div>
+
+
+  <script>
+  function openNav() {
+    document.getElementById("mySidepanel").style.width = "250px";
+  }
+  
+  function closeNav() {
+    document.getElementById("mySidepanel").style.width = "0";
+  }
+  </script>
+
+{% endblock content %}

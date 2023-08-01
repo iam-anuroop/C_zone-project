@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include  'includes/navbar.html' %}
+
+<form class='filterform' action = "{% url 'filter' %}" method="get">
+      <select class="filter form-control" name="price_filter" id="price_filter">
+        <option value="">Filter</option>
+        <option value="0-1000">Less than $1000</option>
+        <option value="1000-2000">$1000 - $2000</option>
+        <option value="2000-3000">$2000 - $3000</option>
+        <option value="3000-1000000">More than $3000 </option>
+        <!-- Add more price ranges as needed -->
+      </select>
+    </div>
+    <button type="submit" class="btn_filter btn btn-primary">Filter</button>
+</form>
+
+
+<div class='rooms_main_div Container'>
+{% for room in rooms %}
+
+    <div class="card d-inline-flex shadow p-2 m-3 bg-white rounded" style="width: 18rem;">
+        <img class="card-img-top" src="{{ MEDIA_URL }}{{ room.photo.url }}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{ room.roomtype }}</h5>
+          <h5 class="card-title">capacity: {{ room.capacity }}</h5>
+          <p class="card-text">{{room.description}}</p>
+          <h5>price:{{ room.price }}</h5>
+          {% if room.id in booked_room_ids %}
+          <a href="" class="btn btn-success">Reserved</a>
+          {% else %}
+            <a href="{% url 'hotelbook' hotel_id=room.hotel_id.id room_id=room.id %}" class="btn btn-primary">Book</a>
+          {% endif%}
+        </div>
+      </div>
+
+{% endfor %}
+</div>
+
+<style>
+  .btn_filter{
+    background: transparent;
+    color: cyan;
+    border: 1px solid cyan;
+  }
+  .rooms_main_div{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 1400px;
+    padding: 20px;
+  }
+    .filterform{
+        display:flex;
+        position: fixed;
+        z-index: 1;
+        right: 180px;
+        top: 25px;
+    }
+    .filter{
+        width:100px;
+    }
+    .card-img-top{
+      width: 200px; /* Set a fixed width for the image */
+      height: 150px; /* Set a fixed height for the image */
+      object-fit: cover; /* Ensure the image retains its aspect ratio while covering the entire container */
+      border-radius: 5px; /* Optionally add border-radius to give the image rounded corners */
+    }
+</style>
+
+
+
+{% endblock content %}

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% include 'includes/navbar.html' %}
+ 
+<h3 class='mt-5 ml-5'>{{hotel.hotel_name}}</h3>
+
+
+<div class="card ml-5 mr-5 ">
+	<div class="row no-gutters">
+		<aside class="col-md-6">
+<article class="gallery-wrap"> 
+	<div class="img-big-wrap">
+	   <a href="#"><img height='380px' src="{{ MEDIA_URL }}{{ hotel.hotel_profile.url }}"></a>
+	</div> <!-- img-big-wrap.// -->
+	
+</article> <!-- gallery-wrap .end// -->
+		</aside>
+		<main class="col-md-6 border-left">
+<article class="content-body">
+
+<h2 class="title">{{room.roomtype}}</h2>
+
+<div class="mb-3"> 
+	<var class="price h4">price :{{room.price}}</var> 
+	<h5>capacity :{{room.capacity}}</h5> 
+</div> 
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="check-in-date">Check-in Date:</label>
+        <input type="date" id="check-in-date" name="check_in_date" required><br>
+        
+        <label for="check-out-date">Check-out Date:</label>
+        <input type="date" id="check-out-date" name="check_out_date" required><br>
+        
+        <label for="num-of-guests">Number of Guests:</label>
+        <input type="number" id="num-of-guests" name="num_of_guests" required><br>
+        
+        <label for="special-requests">Special Requests:</label>
+        <textarea id="special-requests" name="special_requests"></textarea><br>
+        
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+        
+        <label for="id-card">ID Card:</label>
+        <input type="file" id="id-card" name="id_card" required><br>
+        
+        <input type="submit" value="Book now"/>
+    </form>
+    <div class="form-group col-md-6">
+        {% for message in messages %}
+            {% if message.tags == "success" %}
+                <div class="text-success alert alert-success font-weight-bold" role="alert" id="message-alert">{{message}}</div>
+            {% endif %}
+            {% if message.tags == "error" %}
+                <div class="text-danger alert alert-danger font-weight-bold" role="alert" id="message-alert">{{message}}</div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    
+
+</article> <!-- product-info-aside .// -->
+		</main> <!-- col.// -->
+	</div> <!-- row.// -->
+</div> <!-- card.// -->
+
+
+
+<script>
+    setTimeout(function() {
+        var messageAlerts = document.querySelectorAll('#message-alert');
+        if (messageAlerts) {
+            messageAlerts.forEach(function(alert) {
+                alert.style.display = 'none';
+            });
+        }
+    }, 8000);
+
+</script>
+
+
+
+{% endblock content %}

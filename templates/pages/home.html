@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'includes/navbar.html' %} 
+
+<div class="carousel-container">
+  <!-- Your carousel code here -->
+</div>
+
+<div class='home_card_container Container'>
+{% for hotel in hotels   %}
+<div class="card d-inline-flex shadow p-2 m-3 bg-white rounded hotel-card" style="width: 18rem;">
+    <img class="card-img-top" src="{{MEDIA_URL}}{{hotel.hotel_profile.url}}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{hotel.hotel_name}}</h5>
+      <span class='ratingspan'>
+        <div class='d-flex'>
+          {% if hotel.avg_rating < 0.5 %}
+          <span class="fa fa-star unchecked"></span><span class="fa fa-star unchecked"></span><span class="fa fa-star unchecked"></span><span class="fa fa-star unchecked"></span><span class="fa fa-star unchecked"></span>
+          {% elif hotel.avg_rating >= 0.5 and hotel.avg_rating < 1 %}
+          <span class="fa fa-star-half-full"></span><span class="fa fa-star unchecked"></span><span class="fa fa-star unchecked"></span><span class="fa fa-star unchecked"></span><span class="fa fa-star unchecked"></span>
+          {% elif hotel.avg_rating >= 1 and hotel.avg_rating < 1.5 %}
+          <span class="fa fa-star checked"></span><span class="fa fa-star unchecked"></span><span class="fa fa-star unchecked"></span><span class="fa fa-star unchecked"></span><span class="fa fa-star unchecked"></span>
+          {% elif hotel.avg_rating >= 1.5 and hotel.avg_rating < 2 %}
+          <span class="fa fa-star checked"></span><span class="fa fa-star-half-full"></span><span class="fa fa-star unchecked"></span><span class="fa fa-star unchecked"></span><span class="fa fa-star unchecked"></span>
+          {% elif hotel.avg_rating >= 2 and hotel.avg_rating < 2.5 %}
+          <span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star unchecked"></span><span class="fa fa-star unchecked"></span><span class="fa fa-star unchecked"></span>
+          {% elif hotel.avg_rating >= 2.5 and hotel.avg_rating < 3 %}
+          <span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star-half-full"></span><span class="fa fa-star unchecked"></span><span class="fa fa-star unchecked"></span>
+          {% elif hotel.avg_rating >= 3 and hotel.avg_rating < 3.5 %}
+          <span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star unchecked"></span><span class="fa fa-star unchecked"></span>
+          {% elif hotel.avg_rating >= 3.5 and hotel.avg_rating < 4 %}
+          <span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star-half-full"></span><span class="fa fa-star unchecked"></span>
+          {% elif hotel.avg_rating >= 4 and hotel.avg_rating < 4.5 %}
+          <span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star unchecked"></span>
+          {% elif hotel.avg_rating >= 4.5 and hotel.avg_rating < 5 %}
+          <span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star-half-full"></span>
+          {% elif hotel.avg_rating == 5 %}
+          <span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span>
+          {% endif %}
+        </div>
+      </span>
+      <p class="card-text">{{hotel.city}}</p>
+      <p class="card-text">{{hotel.district}}</p>
+      <p>Average Rating: {{ hotel.avg_rating }}</p> <!-- Display the average rating -->
+      <a href="{% url 'hotelrooms' hotel.id %}" class="btn btn-primary">Book now</a>
+    </div>
+  </div>
+{% endfor %}
+</div>
+
+<style>
+  .home_card_container{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 1400px;
+    padding: 20px;
+
+  }
+  .card-img-top{
+    width: 200px; /* Set a fixed width for the image */
+    height: 150px; /* Set a fixed height for the image */
+    object-fit: cover; /* Ensure the image retains its aspect ratio while covering the entire container */
+    border-radius: 5px; /* Optionally add border-radius to give the image rounded corners */
+  }
+
+  /* Your carousel styles here */
+
+  .fa {
+    color: orange;
+  }
+
+
+  /* Add your custom styles for unchecked stars here */
+  .fa-star.unchecked:before {
+    content: "\2606"; /* Unicode for empty star */
+  }
+
+  /* Add your custom styles for half-full stars here */
+  .fa-star.half-full:before {
+    content: "\2605"; /* Unicode for half-full star */
+  }
+</style>
+
+{% endblock content %}

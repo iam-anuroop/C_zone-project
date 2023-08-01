@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Invoice</title>
+    <link rel="" href="">
+    <script src=""></script>
+    <style>
+
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .invoice-table th,
+        .invoice-table td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .invoice-table th {
+            background-color: #f2f2f2;
+            text-align: left;
+            font-weight: normal;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="header">
+            <h1>Invoice</h1>
+            <hr class='hr'>
+            <h3>C_zone</h3>
+        </div>
+        <div class="address-section">
+            <address>
+                <p>{{data.hotel.hotel_name}}</p>
+                <p>{{data.hotel.hotel_email}}</p>
+                <p>{{data.hotel.city}}</p>
+                <p>{{data.hotel.district}}</p>
+                <p>{{data.hotel.state}}</p>
+            </address>
+        </div>
+        <hr class='hr'>
+        <div class="details">
+            <h2>{{data.name}}</h2>
+            <table class="invoice-table table ">
+                <tr>
+                    <th>Booking id</th>
+                    <td>{{data.booking_id}}</td>
+                </tr>
+                <tr>
+                    <th>Check in</th>
+                    <td>{{data.check_in_date}}</td>
+                </tr>
+                <tr>
+                    <th>Check out</th>
+                    <td>{{data.check_out_date}}</td>
+                </tr>
+            </table>
+        </div>
+        <hr class='hr'>
+        <div class="total-section">
+            <p>Total: {{amount}}</p>
+            <p>Amount Paid: {{amount}}</p>
+            <p>Balance Due: 0.00</p>
+        </div>
+        <hr class='hr'>
+        <div class="notes-section">
+            <h3>Additional Notes</h3>
+            <p>A finance charge of 2% will be made on unpaid balances after 30 days.</p>
+        </div>
+        <div class="footer">
+            <p>Thank you for choosing our services!</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,234 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include  'includes/navbar.html' %}
+
+
+<div class="d-flex">
+<div class='main_hotel_room Container'>
+<div class='Container'>
+   <div><h2 class="heading_of_hotel_room">Rooms available in {{hotel.hotel_name}}</h2></div> 
+{% for room in rooms %}
+    <div class="card d-inline-flex shadow p-2 m-3 bg-white rounded" style="width: 18rem;">
+        <img class="card-img-top" src="{{ MEDIA_URL }}{{ room.photo.url }}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{ room.roomtype }}</h5>
+          <p class="card-text">capacity: {{room.capacity}}</p>
+          <h5>price{{ room.price }}</h5>
+          {% if room.id in booked_room_ids %}
+          <a href="" class="btn btn-success">Reserved</a>
+          {% else %}
+            <a href="{% url 'hotelbook' hotel_id=room.hotel_id.id room_id=room.id %}" class="btn btn-primary">Book</a>
+          {% endif%}
+        </div>
+      </div>
+{% endfor %}
+</div> 
+</div> 
+<div class = 'review-box'>
+  <div class="form-group col-md-6">
+    {% for message in messages %}
+        {% if message.tags == "success" %}
+            <div class="text-success alert alert-success font-weight-bold" role="alert" style="width:100px , " id="message-alert">{{message}}</div>
+        {% endif %}
+        {% if message.tags == "error" %}
+            <div class="text-danger alert alert-danger font-weight-bold" role="alert" id="message-alert">{{message}}</div>
+        {% endif %}
+    {% endfor %}
+</div>
+  {% if is_user_booked %}
+    <h3 class="review_heading">Leave a Review</h3>
+    <form method="post">
+      {% csrf_token %}
+      <div>
+        <label for="review">Your Review:</label>
+        <textarea id="review" name="review" rows="4" cols="50"></textarea>
+      </div>
+      <div class="star-rating">
+        <input type="radio" id="star5" name="rating" value="5">
+        <label for="star5"></label>
+        <input type="radio" id="star4" name="rating" value="4">
+        <label for="star4"></label>
+        <input type="radio" id="star3" name="rating" value="3">
+        <label for="star3"></label>
+        <input type="radio" id="star2" name="rating" value="2">
+        <label for="star2"></label>
+        <input type="radio" id="star1" name="rating" value="1">
+        <label for="star1"></label>
+        <input type="hidden" id="rating-value" name="rating-value" value="">
+      </div>
+      <button class="review_button_add" type="submit">Submit Review</button>
+    </form>
+  
+  {% else %}
+  <h3 class="review_heading">Review of {{hotel.hotel_name}}</h3>
+  {% endif %}
+  {% for review in hotel_review %}
+  <div class="review_details_box">
+    <div class="review_person">
+    <span>{{review.user.fullname}}</span> &nbsp &nbsp <span>{{review.created_at}}</span>
+    </div>
+    <div class="review_comment">
+    {{review.comment}}
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+</div>
+
+<style>
+  .heading_of_hotel_room{
+    color: white;
+    margin-top: 20px;
+  }
+
+  .main_hotel_room{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    margin: 0 auto;
+    max-width: 1400px;
+    max-height: 700px;
+    padding-left: 20px;
+    padding-right: 2px;
+    flex:1;
+
+
+  }
+
+  .card-img-top{
+  width: 200px; 
+  height: 150px;
+  object-fit: cover; 
+  border-radius: 5px; 
+}
+  /* General styles for the review box */
+.review-box {
+  width: 250px;
+  background: whitesmoke;
+  margin-top: 60px;
+  border-radius: 5px;
+  padding: 10px;
+  overflow: hidden;
+  height: 400px; /* Hide content that exceeds the box height */
+}
+
+/* Heading style */
+.review_heading {
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 10px;
+}
+
+/* Add button style */
+.review_button_add {
+  background: lightskyblue;
+  border-radius: 5px;
+  padding: 5px 10px;
+  display: block;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Style for each review */
+.review_details_box {
+  border: 1px solid black;
+  margin: 5px;
+  text-align: left;
+  padding: 10px;
+}
+
+.review_person {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.review_comment {
+  color:black
+}
+
+.review-box {
+  height: 500px;
+  overflow-y: scroll;
+  margin-right: 30px;
+}
+
+.review-box::-webkit-scrollbar {
+  width: 8px; 
+}
+
+.review-box::-webkit-scrollbar-thumb {
+  background-color: lightskyblue; /* Color of the scrollbar thumb */
+  border-radius: 4px; /* Rounded corners */
+}
+
+.review-box::-webkit-scrollbar-thumb:hover {
+  background-color: deepskyblue; /* Color of the scrollbar thumb on hover */
+}
+
+
+
+
+
+
+  #review{
+    width:220px
+  }
+  .star-rating {
+    display: flex;
+    align-items:center;
+    flex-direction: row-reverse;
+    float:left; /* Change this property to make the stars show from left to right */
+  }
+  
+  .star-rating input[type="radio"] {
+    display: none;
+  }
+  
+  .star-rating label {
+    font-size: 24px;
+    color: #ccc;
+    cursor: pointer;
+  }
+  
+  .star-rating label:before {
+    content: '\2605';
+  }
+  
+  .star-rating input[type="radio"]:checked ~ label {
+    color: #ff9800; /* Change this color to represent the selected/filled stars */
+  }
+  
+  .star-rating label:hover {
+    color: #ff9800; /* Change this color to represent the hover state */
+  }
+
+</style>
+
+
+
+<script>
+  const starRating = document.querySelector('.star-rating');
+  const ratingValue = document.getElementById('rating-value');
+
+
+  starRating.addEventListener('click', (event) => {
+    if (event.target.tagName === 'INPUT') {
+      const selectedRating = event.target.value;
+      ratingValue.value = selectedRating;
+    }
+  });
+
+
+  setTimeout(function() {
+    var messageAlerts = document.querySelectorAll('#message-alert');
+    if (messageAlerts) {
+      messageAlerts.forEach(function(alert) {
+        alert.style.display = 'none';
+      });
+    }
+  }, 8000);
+</script>
+
+
+
+{% endblock content %}

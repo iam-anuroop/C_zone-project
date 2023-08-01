@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+{% include 'includes/navbar.html' %}
+
+
+<section class="section-content padding-y">
+
+    <!-- ============================ COMPONENT REGISTER   ================================= -->
+        <div class="card mx-auto" style="max-width:520px; margin-top:40px;">
+          <article class="card-body">
+            <header class="mb-4"><h4 class="card-title">Sign up</h4></header>
+            <form action="{% url 'registration'%}" method="POST">
+                {% csrf_token %}
+                {% load widget_tweaks %}
+                
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="{{form.fullname.id_for_label}}">Full name</label>
+                           {{ form.fullname|attr:"placeholder:fullname..." }}
+                        </div>
+                        <div class="form-row"> 
+                            <div class="form-group col-md-6">
+                              <label for="{{form.email.id_for_label}}">Email</label>
+                               {{ form.email|attr:"placeholder:email..." }}
+                            </div> 
+                        </div>
+                    </div>
+                     
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="{{form.username.id_for_label}}">Username</label>
+                           {{ form.username|attr:"placeholder:username..." }}
+                        </div> 
+                        <div class="form-group col-md-6">
+                          <label for="{{form.phone.id_for_label}}">Phone Number</label>
+                           {{ form.phone|attr:"placeholder:phone number..." }}
+                        </div> 
+                    </div> 
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="{{form.password.id_for_label}}">Create password</label>
+                            {{ form.password|attr:"placeholder:password..." }}
+                        </div> 
+                        <div class="form-group col-md-6">
+                            <label for="{{form.confirmpassword.id_for_label}}">Confirm Password</label>
+                            {{ form.confirmpassword|attr:"placeholder:password..."}}
+                        </div> 
+                    </div>
+                    <div class="form-group col-md-6">
+                        {% for message in messages %}
+                            {% if message.tags == "success" %}
+                                <div class="text-success alert alert-success font-weight-bold" role="alert" id="message-alert">{{message}}</div>
+                            {% endif %}
+                            {% if message.tags == "error" %}
+                                <div class="text-danger alert alert-danger font-weight-bold" role="alert" id="message-alert">{{message}}</div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block btn-dark"> Register  </button>
+                    </div>
+                </form>
+            </article><!-- card-body.// -->
+        </div> <!-- card .// -->
+        <p class="text-center mt-4">Have an account?<a href="{% url 'login' %}">Log In</a></p>
+        <br><br>
+
+    <!-- ============================ COMPONENT REGISTER  END.// ================================= -->
+
+    </section>
+
+
+<script>
+    setTimeout(function() {
+        var messageAlerts = document.querySelectorAll('#message-alert');
+        if (messageAlerts) {
+            messageAlerts.forEach(function(alert) {
+                alert.style.display = 'none';
+            });
+        }
+    }, 8000);
+</script>
+{% endblock content %}

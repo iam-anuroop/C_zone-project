@@ -1,0 +1,14 @@
+{% autoescape off %}
+
+        Please activate your account
+        Dear {{ hotel.hotel_name }},
+        Thank you for registering your buisiness from the account {{user.fullname}} Please click the following link to activate your account:
+         "http://{{ domain }}{% url 'activatehotel' uidb64=uid token=token %}  Activate Hotel Account
+        If the above link doesn't work, you can copy and paste the following URL into your browser:
+        http://{{ domain }}{% url 'activatehotel' uidb64=uid token=token %}
+        Thank you,
+        Your Website Team
+   
+
+
+{% endautoescape %}

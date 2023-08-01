@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'includes/navbar.html' %}
+
+<div class="container">
+  <h1>Hotel Owner Details</h1>
+  <form method="post" enctype="multipart/form-data" class="hotel-owner-form">
+    {% csrf_token %}
+    {% load widget_tweaks %}
+
+
+    <div class="form-group">
+      <label for="{{ form.owner_name.id_for_label }}">Owner Name:</label>
+      {{ form.owner_name|attr:'class:form-control' }}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.owner_email.id_for_label }}">Owner Email:</label>
+      {{ form.owner_email|attr:'class:form-control' }}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.owner_contact.id_for_label }}">Owner Contact:</label>
+      {{ form.owner_contact|attr:'class:form-control' }}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.owner_address.id_for_label }}">Owner Address:</label>
+      {{ form.owner_address|attr:'class:form-control' }}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.id_card.id_for_label }}">ID Card:</label>
+      {{ form.id_card|attr:'class:form-control-file' }}
+    </div>
+
+    <div class="form-group col-md-6">
+      {% for message in messages %}
+      {% if message.tags == "success" %}
+      <div class="text-success alert alert-success font-weight-bold" role="alert" id="message-alert">{{message}}</div>
+      {% endif %}
+      {% if message.tags == "error" %}
+      <div class="text-danger alert alert-danger font-weight-bold" role="alert" id="message-alert">{{message}}</div>
+      {% endif %}
+      {% endfor %}
+    </div>
+
+    <input type="submit" value="Save" class="btn btn-primary">
+  </form>
+</div>
+
+<style>
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .hotel-owner-form .form-group {
+    margin-bottom: 20px;
+  }
+
+  .hotel-owner-form label {
+    font-weight: bold;
+    display: block;
+  }
+
+  .hotel-owner-form .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .hotel-owner-form .form-control-file {
+    border: none;
+    padding: 0;
+  }
+
+  .hotel-owner-form .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .hotel-owner-form .btn-primary:hover {
+    background-color: #0056b3;
+  }
+
+  .hotel-owner-form .text-success {
+    color: #28a745;
+  }
+
+  .hotel-owner-form .text-danger {
+    color: #dc3545;
+  }
+</style>
+
+<script>
+  setTimeout(function() {
+    var messageAlerts = document.querySelectorAll('#message-alert');
+    if (messageAlerts) {
+      messageAlerts.forEach(function(alert) {
+        alert.style.display = 'none';
+      });
+    }
+  }, 8000);
+</script>
+
+{% endblock content %}

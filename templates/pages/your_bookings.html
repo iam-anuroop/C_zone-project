@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'includes/navbar.html' %}
+
+<div class="container">
+  <div class="incomplete-bookings">
+    <h2>Incomplete Bookings</h2>
+    <table>
+      <tbody>
+        {% for book in books %}
+        <tr>
+          <td>{{ book.hotel.hotel_name }}</td>
+          <td>{{ book.room_type.roomtype }}</td>
+          <td>{{ book.room_type.price }}</td>
+          <td class="image-cell"><img class="image" src="{{ MEDIA_URL }}{{ book.room_type.photo.url }}" alt="Profile Image"></td>
+          <td>
+            {% if book.room_type.id in booked_room_ids %}
+            <span class="not-available">Not available</span>
+            {% else %}
+            <a href="{% url 'payment' book.id book.room_type.id %}" class="btn btn-success">Book now</a>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="completed-bookings">
+    <h2>Completed Bookings</h2>
+    {% for book in booking %}
+    <div class="booking-info">
+      <h3>{{ book.hotel.hotel_name }}</h3>
+      <h3>{{ book.room_type }}</h3>
+      <a href="{% url 'invoice' book.id %}" class="btn btn-success">Download Invoice</a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  body {
+    background-color: maroon;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .incomplete-bookings,
+  .completed-bookings {
+    margin-bottom: 40px;
+  }
+
+  .incomplete-bookings h2,
+  .completed-bookings h2 {
+    margin-bottom: 20px;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  th,
+  td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  .image {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn:hover {
+    background-color: #45a049;
+  }
+
+  .not-available {
+    padding: 5px 10px;
+    background-color: #9b0a0a;
+    color: white;
+    border-radius: 5px;
+  }
+
+  .booking-info {
+    margin-bottom: 20px;
+    background-color: transparent;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+</style>
+
+{% endblock content %}

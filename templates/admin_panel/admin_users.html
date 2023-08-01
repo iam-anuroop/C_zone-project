@@ -1,0 +1,57 @@
+{% extends 'admin_panel/admin_sidebar.html' %}
+{% block admincontent %}
+<table>
+    <thead>
+        <tr>
+            <th class='text-center' colspan='5'>User</th>
+        </tr>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>username</th>
+        <th>phone</th>
+        <th class='text-center'>is_Hoteluser</th>
+      </tr>
+    </thead>
+    <tbody>
+{% for user in users %}
+
+      <tr>
+        <td>{{user.fullname}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.phone}}</td>
+        <td class='text-center'>
+            {% if user.is_hoteluser == True %}
+            <i class="fa-solid fa-circle-check text-primary"></i>
+            {% else %}
+            <i class="fa-solid fa-circle-xmark "></i>
+            {% endif %}
+        </td>
+      </tr>
+{% endfor %}
+
+    </tbody>
+  </table>
+
+  
+
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+
+
+{% endblock admincontent %}

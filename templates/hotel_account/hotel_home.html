@@ -1,0 +1,57 @@
+{% extends 'hotel_account/hotel_home_sidebar.html' %}
+
+{% block hotelcontent %}
+
+<div class="table-container">
+  <table class='table'>
+    <thead>
+      <tr>
+        <th colspan='4'>Paid Bookings</th>
+      </tr>
+      <tr>
+        <th>Customer</th>
+        <th>Book ID</th>
+        <th>Check-in</th>
+        <th>Check-out</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for paid_book in paid_bookings %}
+      <tr>
+        <td>{{paid_book.name}}</td>
+        <td>{{paid_book.booking_id}}</td>
+        <td>{{paid_book.check_in_date}}</td>
+        <td>{{paid_book.check_out_date}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock hotelcontent %}
+
+<style>
+  .table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 20px); /* Adjust the height to account for the top padding in the sidebar */
+    margin-left: 200px; /* Set the width of the sidebar */
+  }
+
+  table {
+    width: auto;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+</style>

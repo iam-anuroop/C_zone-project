@@ -1,0 +1,58 @@
+{% extends 'admin_panel/admin_sidebar.html' %}
+{% block admincontent %}
+<table>
+    <thead>
+      <tr>
+        <th class='text-center' colspan='6'>Hotel Confirmation</th>
+    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Registration Number</th>
+        <th>Image</th>
+        <th>Confirm</th>
+        <th>Reject</th>
+      </tr>
+    </thead>
+    <tbody>
+{% for hotel in hotels %}
+
+      <tr>
+        <td>{{hotel.hotel_name}}</td>
+        <td>{{hotel.hotel_email}}</td>
+        <td>{{hotel.hotel_registration_number}}</td>
+        <td class="image-cell"><img class='image' src="{{MEDIA_URL}}{{hotel.hotel_profile.url}}" alt="Profile Image"></td>
+        <td><a onclick="return confirm('Are you sure you want to accept this?')"  href='{% url 'hotelaccept' hotel.id %}' class='btn btn-success'>Accept</a></td>
+        <td><a onclick="return confirm('Are you sure you want to Reject this?')"  href='{% url 'hotelreject' hotel.id %}' class='btn btn-danger'>Reject</a></td>
+      </tr>
+{% endfor %}
+
+    </tbody>
+  </table>
+
+  
+
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .image{
+      width: 150px;
+      height: 100px;
+    }
+  </style>
+
+
+{% endblock admincontent %}

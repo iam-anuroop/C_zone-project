@@ -1,0 +1,14 @@
+{% autoescape off %}
+
+        <h1>Please activate your account</h1>
+        <p>Dear {{ user.fullname }},</p>
+        <p>Thank you for registering. Please click the following link to activate your account:</p>
+        <a href="http://{{ domain }}{% url 'activate' uidb64=uid token=token %}">Activate Account</a>
+        <p>If the above link doesn't work, you can copy and paste the following URL into your browser:</p>
+        <p>http://{{ domain }}{% url 'activate' uidb64=uid token=token %}</p>
+        <p>Thank you,</p>
+        <p>Your Website Team</p>
+   
+
+
+{% endautoescape %}
