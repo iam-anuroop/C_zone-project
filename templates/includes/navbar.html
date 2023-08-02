@@ -211,7 +211,25 @@ function closeNav() {
 
 // Function to toggle the hamburger menu
 function toggleMenu() {
-  const menu = document.getElementById("hamburgerMenu");
-  menu.style.display = (menu.style.display === "block") ? "none" : "block";
+  const hamburgerMenu = document.getElementById("hamburgerMenu");
+  const sidepanel = document.getElementById("mySidepanel");
+
+  if (hamburgerMenu.style.display === "block" || sidepanel.style.width === "250px") {
+    hamburgerMenu.style.display = "none";
+    sidepanel.style.width = "0";
+  } else {
+    hamburgerMenu.style.display = "block";
+    sidepanel.style.width = "250px";
+  }
+}
+
+// Close the hamburger menu and side panel if clicked outside
+window.onclick = function(event) {
+  const hamburgerMenu = document.getElementById("hamburgerMenu");
+  const sidepanel = document.getElementById("mySidepanel");
+  if (event.target !== hamburgerMenu && event.target !== sidepanel) {
+    hamburgerMenu.style.display = "none";
+    sidepanel.style.width = "0";
+  }
 }
 </script>
