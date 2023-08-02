@@ -117,7 +117,8 @@
     color: cyan;
     cursor: pointer;
   }
-.sidepanel  {
+  
+  .sidepanel  {
     width: 0;
     position: fixed;
     z-index: 1;
@@ -129,7 +130,7 @@
     transition: 0.5s;
     padding-top: 60px;
     padding-bottom: 40px;
-    border-radius:10px;
+    border-radius: 10px;
   }
   
   .sidepanel a {
@@ -144,13 +145,7 @@
   .sidepanel a:hover {
     color: whitesmoke;
   }
-  .sidepanel_a:hover{
-    background: black;
-    margin: 5px;
-    border-radius: 5px;
-
-  }
- 
+  
   .sidepanel .closebtn {
     position: absolute;
     top: 0;
@@ -178,7 +173,15 @@
   <span class="closebtn" onclick="toggleHamburgerMenu()">&times;</span>
 </div>
 
+<div id="mySidepanel" class="sidepanel">
+  <div class="closebtn_div" ><a href="javascript:void(0)" class="closebtn" title="close" onclick="closeNav()">&times;</a></div>
+  <div class="sidepanel_a" ><a href="{% url 'userprofile' %}">Profile</a></div>
+  <div class="sidepanel_a" ><a href="{% url 'yourbookings' %}">Your bookings</a></div>
+  <div class="sidepanel_a" ><a href="#">Contact</a></div>
+  <div class="sidepanel_a" ><a href="{% url 'hotellogin' %}">Hotel</a></div>
+</div>
 
+<!-- Rest of your existing content... -->
 <div id="mySidepanel" class="sidepanel">
     <div class="closebtn_div" ><a href="javascript:void(0)" class="closebtn" title="close" onclick="closeNav()">×</a></div>
     <div class="sidepanel_a" ><a href="{% url 'userprofile' %}">Profile</a></div>
@@ -186,8 +189,6 @@
     <div class="sidepanel_a" ><a href="#">Contact</a></div>
     <div class="sidepanel_a" ><a href="{% url 'hotellogin' %}">Hotel</a></div>
   </div>
-
-<!-- Rest of your existing content... -->
 
 <script>
   function toggleHamburgerMenu() {
@@ -199,8 +200,7 @@
     }
   }
 
-
-function openNav() {
+  function openNav() {
     document.getElementById("mySidepanel").style.width = "250px";
   }
   
@@ -210,4 +210,3 @@ function openNav() {
 </script>
 
 {% endblock content %}
- 
