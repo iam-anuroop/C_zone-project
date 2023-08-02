@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block content %}
 
 <style>
@@ -74,40 +73,30 @@
   .c_zone_title{
     color: yellow;
   }
-</style>
 
-
-<nav class="main_nav_div">
-  <div class="c_zone_title">
-    <div><h3>C_zone</h3></div>
-  </div>
-  <div class="nav_links">
-    <a href="{% url 'home' %}" class="page_link">Hotels</a>
-    <a href="{% url 'rooms' %}" class="page_link">Rooms</a>
-    <form action="{% url 'search' %}" class="search_form">
-      <input type="search" name="search" class="search_input" placeholder="search...">
-      <button type="submit" class="search_button">Search</button>
-    </form>
-  </div>
-  <div class="user_icons">
-    <div class="user_icon"><a href='{% url 'registration' %}'><i class="fa-solid fa-user pl-4 pr-3"></i></a></div>
-    <div class="ellipsis_icon"><i class="openbtn fa-solid fa-ellipsis-vertical pl-3 pr-3" onclick="openNav()"></i></div>
-  </div>
-</nav>
-
-
-
-
-<!--sidebaaar-->
-<!--sidebaaar-->
-<!--sidebaaar-->
-<!--sidebaaar-->
-<!--sidebaaar-->
-<!--sidebaaar-->
-
-
-<style>
-  .sidepanel  {
+  /* Add styles for the hamburger menu */
+  .hamburger {
+    display: none;
+    font-size: 24px;
+    color: cyan;
+    cursor: pointer;
+  }
+  /* Hide the regular nav links when screen width is less than 750px */
+  @media screen and (max-width: 750px) {
+    .nav_links {
+      display: none;
+    }
+    /* Show the hamburger menu when screen width is less than 750px */
+    .hamburger {
+      display: block;
+    }
+    /* Show the sidepanel when the hamburger menu is clicked */
+    #mySidepanel {
+      width: 0;
+    }
+  }
+  /* Existing styles for the sidepanel... */
+.sidepanel  {
     width: 0;
     position: fixed;
     z-index: 1;
@@ -147,10 +136,29 @@
     right: 10px;
     font-size: 30px;
   }
-  
-  </style>
-  
-  <div id="mySidepanel" class="sidepanel">
+</style>
+
+<nav class="main_nav_div">
+  <div class="c_zone_title">
+    <div><h3>C_zone</h3></div>
+  </div>
+  <div class="nav_links">
+    <a href="{% url 'home' %}" class="page_link">Hotels</a>
+    <a href="{% url 'rooms' %}" class="page_link">Rooms</a>
+    <form action="{% url 'search' %}" class="search_form">
+      <input type="search" name="search" class="search_input" placeholder="search...">
+      <button type="submit" class="search_button">Search</button>
+    </form>
+  </div>
+  <div class="user_icons">
+    <div class="user_icon"><a href='{% url 'registration' %}'><i class="fa-solid fa-user pl-4 pr-3"></i></a></div>
+    <div class="ellipsis_icon"><i class="openbtn fa-solid fa-ellipsis-vertical pl-3 pr-3" onclick="openNav()"></i></div>
+  </div>
+  <div class="hamburger" onclick="openNav()">&#9776;</div>
+</nav>
+
+<!-- Rest of your existing content... -->
+<div id="mySidepanel" class="sidepanel">
     <div class="closebtn_div" ><a href="javascript:void(0)" class="closebtn" title="close" onclick="closeNav()">×</a></div>
     <div class="sidepanel_a" ><a href="{% url 'userprofile' %}">Profile</a></div>
     <div class="sidepanel_a" ><a href="{% url 'yourbookings' %}">Your bookings</a></div>
@@ -158,15 +166,13 @@
     <div class="sidepanel_a" ><a href="{% url 'hotellogin' %}">Hotel</a></div>
   </div>
 
+{% endblock content %}
 
-  <script>
+<script>
   function openNav() {
     document.getElementById("mySidepanel").style.width = "250px";
   }
-  
   function closeNav() {
     document.getElementById("mySidepanel").style.width = "0";
   }
-  </script>
-
-{% endblock content %}
+</script>
