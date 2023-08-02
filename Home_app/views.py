@@ -18,7 +18,7 @@ def Searchotel(request):
 
     if 'search' in request.GET:
         search = request.GET['search']
-        list_hotels = HotelDetails.objects.filter(Q(hotel_name__icontains=search) | Q(city__icontains=search) | Q(state__icontains=search))
+        list_hotels = HotelDetails.objects.filter(Q(hotel_name__icontains=search) | Q(city__icontains=search) | Q(state__icontains=search),is_registerd = True,is_confirmed = True)
 
         return render(request,'pages/home.html',{'hotels':list_hotels})
     else:
