@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% block content %}
 
 <style>
@@ -73,51 +74,39 @@
   .c_zone_title{
     color: yellow;
   }
+</style>
 
-  /* Add styles for the hamburger menu */
-  .hamburger {
-    display: none;
-    font-size: 24px;
-    color: cyan;
-    cursor: pointer;
-    z-index: 2;
-  }
 
-  .hamburger-menu {
-    display: none;
-    background-color: whitesmoke;
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 250px;
-    padding-top: 60px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-  }
+<nav class="main_nav_div">
+  <div class="c_zone_title">
+    <div><h3>C_zone</h3></div>
+  </div>
+  <div class="nav_links">
+    <a href="{% url 'home' %}" class="page_link">Hotels</a>
+    <a href="{% url 'rooms' %}" class="page_link">Rooms</a>
+    <form action="{% url 'search' %}" class="search_form">
+      <input type="search" name="search" class="search_input" placeholder="search...">
+      <button type="submit" class="search_button">Search</button>
+    </form>
+  </div>
+  <div class="user_icons">
+    <div class="user_icon"><a href='{% url 'registration' %}'><i class="fa-solid fa-user pl-4 pr-3"></i></a></div>
+    <div class="ellipsis_icon"><i class="openbtn fa-solid fa-ellipsis-vertical pl-3 pr-3" onclick="openNav()"></i></div>
+  </div>
+</nav>
 
-  .hamburger-menu a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 20px;
-    color: grey;
-    display: block;
-    transition: 0.3s;
-  }
 
-  .hamburger-menu a:hover {
-    color: whitesmoke;
-  }
 
-  .hamburger-menu .closebtn {
-    position: absolute;
-    top: 0;
-    right: 10px;
-    font-size: 30px;
-    color: cyan;
-    cursor: pointer;
-  }
-  
+
+<!--sidebaaar-->
+<!--sidebaaar-->
+<!--sidebaaar-->
+<!--sidebaaar-->
+<!--sidebaaar-->
+<!--sidebaaar-->
+
+
+<style>
   .sidepanel  {
     width: 0;
     position: fixed;
@@ -130,7 +119,7 @@
     transition: 0.5s;
     padding-top: 60px;
     padding-bottom: 40px;
-    border-radius: 10px;
+    border-radius:10px;
   }
   
   .sidepanel a {
@@ -145,44 +134,23 @@
   .sidepanel a:hover {
     color: whitesmoke;
   }
-  
+  .sidepanel_a:hover{
+    background: black;
+    margin: 5px;
+    border-radius: 5px;
+
+  }
+ 
   .sidepanel .closebtn {
     position: absolute;
     top: 0;
     right: 10px;
     font-size: 30px;
   }
-</style>
-
-<nav class="main_nav_div">
-  <!-- Existing navigation bar content... -->
-  <div class="hamburger" onclick="toggleHamburgerMenu()">&#9776;</div>
-</nav>
-
-<div id="myHamburgerMenu" class="hamburger-menu">
-  <a href="{% url 'home' %}" class="page_link">Hotels</a>
-  <a href="{% url 'rooms' %}" class="page_link">Rooms</a>
-  <form action="{% url 'search' %}" class="search_form">
-    <input type="search" name="search" class="search_input" placeholder="search...">
-    <button type="submit" class="search_button">Search</button>
-  </form>
-  <div class="user_icons">
-    <div class="user_icon"><a href='{% url 'registration' %}'><i class="fa-solid fa-user pl-4 pr-3"></i></a></div>
-    <!-- Add your second user icon here -->
-  </div>
-  <span class="closebtn" onclick="toggleHamburgerMenu()">&times;</span>
-</div>
-
-<div id="mySidepanel" class="sidepanel">
-  <div class="closebtn_div" ><a href="javascript:void(0)" class="closebtn" title="close" onclick="closeNav()">&times;</a></div>
-  <div class="sidepanel_a" ><a href="{% url 'userprofile' %}">Profile</a></div>
-  <div class="sidepanel_a" ><a href="{% url 'yourbookings' %}">Your bookings</a></div>
-  <div class="sidepanel_a" ><a href="#">Contact</a></div>
-  <div class="sidepanel_a" ><a href="{% url 'hotellogin' %}">Hotel</a></div>
-</div>
-
-<!-- Rest of your existing content... -->
-<div id="mySidepanel" class="sidepanel">
+  
+  </style>
+  
+  <div id="mySidepanel" class="sidepanel">
     <div class="closebtn_div" ><a href="javascript:void(0)" class="closebtn" title="close" onclick="closeNav()">×</a></div>
     <div class="sidepanel_a" ><a href="{% url 'userprofile' %}">Profile</a></div>
     <div class="sidepanel_a" ><a href="{% url 'yourbookings' %}">Your bookings</a></div>
@@ -190,16 +158,8 @@
     <div class="sidepanel_a" ><a href="{% url 'hotellogin' %}">Hotel</a></div>
   </div>
 
-<script>
-  function toggleHamburgerMenu() {
-    var hamburgerMenu = document.getElementById("myHamburgerMenu");
-    if (hamburgerMenu.style.display === "block") {
-      hamburgerMenu.style.display = "none";
-    } else {
-      hamburgerMenu.style.display = "block";
-    }
-  }
 
+  <script>
   function openNav() {
     document.getElementById("mySidepanel").style.width = "250px";
   }
@@ -207,6 +167,6 @@
   function closeNav() {
     document.getElementById("mySidepanel").style.width = "0";
   }
-</script>
+  </script>
 
 {% endblock content %}
