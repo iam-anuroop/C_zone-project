@@ -112,7 +112,6 @@
     right: 10px;
     font-size: 30px;
   }
-  /* New styles for responsive navbar */
   @media (max-width: 750px) {
     .nav_links {
       display: none;
@@ -141,13 +140,13 @@
 
     .hamburger_menu {
       display: none;
-      position: absolute;
+      position: fixed;
       top: 80px;
-      right: 0;
+      right: 10px;
       background-color: whitesmoke;
       padding: 10px;
       border-radius: 10px;
-      z-index: 1;
+      z-index: 2; /* Updated z-index */
     }
 
     .hamburger_menu a {
