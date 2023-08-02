@@ -133,7 +133,7 @@
   </div>
   <div class="user_icons">
     {% if user.is_authenticated %}
-    <div class="user_icon"><a href='{% url 'logout' %}'><i class="fa-solid fa-right-from-bracket"></i></a></div>
+    <div class="user_icon" onclick="return confirm('Are you sure you want to logout?')" ><a href='{% url 'logout' %}'><i class="fa-solid fa-right-from-bracket"></i></a></div>
     {% else %}
     <div class="user_icon"><a href='{% url 'registration' %}'><i class="fa-solid fa-user pl-4 pr-3"></i></a></div>
     {% endif %}
