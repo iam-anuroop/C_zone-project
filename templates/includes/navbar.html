@@ -1,8 +1,5 @@
-{% extends 'base.html' %}
-
-{% block content %}
-
 <style>
+  /* Your existing styles here */
   .main_nav_div{
     display: flex;
     height: 80px;
@@ -74,39 +71,7 @@
   .c_zone_title{
     color: yellow;
   }
-</style>
 
-
-<nav class="main_nav_div">
-  <div class="c_zone_title">
-    <div><h3>C_zone</h3></div>
-  </div>
-  <div class="nav_links">
-    <a href="{% url 'home' %}" class="page_link">Hotels</a>
-    <a href="{% url 'rooms' %}" class="page_link">Rooms</a>
-    <form action="{% url 'search' %}" class="search_form">
-      <input type="search" name="search" class="search_input" placeholder="search...">
-      <button type="submit" class="search_button">Search</button>
-    </form>
-  </div>
-  <div class="user_icons">
-    <div class="user_icon"><a href='{% url 'registration' %}'><i class="fa-solid fa-user pl-4 pr-3"></i></a></div>
-    <div class="ellipsis_icon"><i class="openbtn fa-solid fa-ellipsis-vertical pl-3 pr-3" onclick="openNav()"></i></div>
-  </div>
-</nav>
-
-
-
-
-<!--sidebaaar-->
-<!--sidebaaar-->
-<!--sidebaaar-->
-<!--sidebaaar-->
-<!--sidebaaar-->
-<!--sidebaaar-->
-
-
-<style>
   .sidepanel  {
     width: 0;
     position: fixed;
@@ -130,7 +95,7 @@
     display: block;
     transition: 0.3s;
   }
-  
+
   .sidepanel a:hover {
     color: whitesmoke;
   }
@@ -147,26 +112,107 @@
     right: 10px;
     font-size: 30px;
   }
+  /* New styles for responsive navbar */
+  @media (max-width: 750px) {
+    .nav_links {
+      display: none;
+    }
+
+    .user_icons {
+      display: none;
+    }
+
+    .c_zone_title {
+      display: none;
+    }
+
+    .hamburger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: cyan;
+      cursor: pointer;
+    }
+
+    .hamburger_icon {
+      font-size: 24px;
+      margin-right: 10px;
+    }
+
+    .hamburger_menu {
+      display: none;
+      position: absolute;
+      top: 80px;
+      right: 0;
+      background-color: whitesmoke;
+      padding: 10px;
+      border-radius: 10px;
+      z-index: 1;
+    }
+
+    .hamburger_menu a {
+      color: grey;
+      display: block;
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 20px;
+      transition: 0.3s;
+    }
+
+    .hamburger_menu a:hover {
+      color: whitesmoke;
+    }
+  }
+</style>
+
+<nav class="main_nav_div">
+  <div class="c_zone_title">
+    <div><h3>C_zone</h3></div>
+  </div>
   
-  </style>
-  
-  <div id="mySidepanel" class="sidepanel">
-    <div class="closebtn_div" ><a href="javascript:void(0)" class="closebtn" title="close" onclick="closeNav()">×</a></div>
-    <div class="sidepanel_a" ><a href="{% url 'userprofile' %}">Profile</a></div>
-    <div class="sidepanel_a" ><a href="{% url 'yourbookings' %}">Your bookings</a></div>
-    <div class="sidepanel_a" ><a href="#">Contact</a></div>
-    <div class="sidepanel_a" ><a href="{% url 'hotellogin' %}">Hotel</a></div>
+  <!-- Hamburger menu for mobile -->
+  <div class="hamburger">
+    <div class="hamburger_icon" onclick="toggleMenu()">&#9776;</div>
   </div>
 
+  <!-- Navigation links for desktop -->
+  <div class="nav_links">
+    <a href="{% url 'home' %}" class="page_link">Hotels</a>
+    <a href="{% url 'rooms' %}" class="page_link">Rooms</a>
+    <form action="{% url 'search' %}" class="search_form">
+      <input type="search" name="search" class="search_input" placeholder="search...">
+      <button type="submit" class="search_button">Search</button>
+    </form>
+  </div>
 
-  <script>
-  function openNav() {
-    document.getElementById("mySidepanel").style.width = "250px";
-  }
-  
-  function closeNav() {
-    document.getElementById("mySidepanel").style.width = "0";
-  }
-  </script>
+  <!-- User icons for desktop -->
+  <div class="user_icons">
+    <div class="user_icon"><a href='{% url 'registration' %}'><i class="fa-solid fa-user pl-4 pr-3"></i></a></div>
+    <div class="ellipsis_icon"><i class="openbtn fa-solid fa-ellipsis-vertical pl-3 pr-3" onclick="openNav()"></i></div>
+  </div>
+</nav>
 
-{% endblock content %}
+<!-- Hamburger menu dropdown for mobile -->
+<div id="hamburgerMenu" class="hamburger_menu">
+  <div class="closebtn_div" ><a href="javascript:void(0)" class="closebtn" title="close" onclick="toggleMenu()">×</a></div>
+  <div class="hamburger_menu_a" ><a href="{% url 'userprofile' %}">Profile</a></div>
+  <div class="hamburger_menu_a" ><a href="{% url 'yourbookings' %}">Your bookings</a></div>
+  <div class="hamburger_menu_a" ><a href="#">Contact</a></div>
+  <div class="hamburger_menu_a" ><a href="{% url 'hotellogin' %}">Hotel</a></div>
+</div>
+
+<script>
+function openNav() {
+  document.getElementById("mySidepanel").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidepanel").style.width = "0";
+}
+
+// Function to toggle the hamburger menu
+function toggleMenu() {
+  const menu = document.getElementById("hamburgerMenu");
+  menu.style.display = (menu.style.display === "block") ? "none" : "block";
+}
+</script>
