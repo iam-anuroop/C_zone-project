@@ -1,5 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
 <style>
-  /* Your existing styles here */
   .main_nav_div{
     display: flex;
     height: 80px;
@@ -112,69 +115,14 @@
     right: 10px;
     font-size: 30px;
   }
-  @media (max-width: 750px) {
-    .nav_links {
-      display: none;
-    }
-
-    .user_icons {
-      display: none;
-    }
-
-    .c_zone_title {
-      display: none;
-    }
-
-    .hamburger {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: cyan;
-      cursor: pointer;
-    }
-
-    .hamburger_icon {
-      font-size: 24px;
-      margin-right: 10px;
-    }
-
-    .hamburger_menu {
-      display: none;
-      position: fixed;
-      top: 80px;
-      right: 10px;
-      background-color: whitesmoke;
-      padding: 10px;
-      border-radius: 10px;
-      z-index: 2; /* Updated z-index */
-    }
-
-    .hamburger_menu a {
-      color: grey;
-      display: block;
-      padding: 8px 8px 8px 32px;
-      text-decoration: none;
-      font-size: 20px;
-      transition: 0.3s;
-    }
-
-    .hamburger_menu a:hover {
-      color: whitesmoke;
-    }
-  }
+  
 </style>
+
 
 <nav class="main_nav_div">
   <div class="c_zone_title">
     <div><h3>C_zone</h3></div>
   </div>
-  
-  <!-- Hamburger menu for mobile -->
-  <div class="hamburger">
-    <div class="hamburger_icon" onclick="toggleMenu()">&#9776;</div>
-  </div>
-
-  <!-- Navigation links for desktop -->
   <div class="nav_links">
     <a href="{% url 'home' %}" class="page_link">Hotels</a>
     <a href="{% url 'rooms' %}" class="page_link">Rooms</a>
@@ -183,53 +131,36 @@
       <button type="submit" class="search_button">Search</button>
     </form>
   </div>
-
-  <!-- User icons for desktop -->
   <div class="user_icons">
     <div class="user_icon"><a href='{% url 'registration' %}'><i class="fa-solid fa-user pl-4 pr-3"></i></a></div>
     <div class="ellipsis_icon"><i class="openbtn fa-solid fa-ellipsis-vertical pl-3 pr-3" onclick="openNav()"></i></div>
   </div>
 </nav>
 
-<!-- Hamburger menu dropdown for mobile -->
-<div id="hamburgerMenu" class="hamburger_menu">
-  <div class="closebtn_div" ><a href="javascript:void(0)" class="closebtn" title="close" onclick="toggleMenu()">×</a></div>
-  <div class="hamburger_menu_a" ><a href="{% url 'userprofile' %}">Profile</a></div>
-  <div class="hamburger_menu_a" ><a href="{% url 'yourbookings' %}">Your bookings</a></div>
-  <div class="hamburger_menu_a" ><a href="#">Contact</a></div>
-  <div class="hamburger_menu_a" ><a href="{% url 'hotellogin' %}">Hotel</a></div>
-</div>
 
-<script>
-function openNav() {
-  document.getElementById("mySidepanel").style.width = "250px";
-}
+<!--sidebaaar-->
 
-function closeNav() {
-  document.getElementById("mySidepanel").style.width = "0";
-}
+<style>
 
-// Function to toggle the hamburger menu
-function toggleMenu() {
-  const hamburgerMenu = document.getElementById("hamburgerMenu");
-  const sidepanel = document.getElementById("mySidepanel");
+  </style>
+  
+  <div id="mySidepanel" class="sidepanel">
+    <div class="closebtn_div" ><a href="javascript:void(0)" class="closebtn" title="close" onclick="closeNav()">×</a></div>
+    <div class="sidepanel_a" ><a href="{% url 'userprofile' %}">Profile</a></div>
+    <div class="sidepanel_a" ><a href="{% url 'yourbookings' %}">Your bookings</a></div>
+    <div class="sidepanel_a" ><a href="#">Contact</a></div>
+    <div class="sidepanel_a" ><a href="{% url 'hotellogin' %}">Hotel</a></div>
+  </div>
 
-  if (hamburgerMenu.style.display === "block" || sidepanel.style.width === "250px") {
-    hamburgerMenu.style.display = "none";
-    sidepanel.style.width = "0";
-  } else {
-    hamburgerMenu.style.display = "block";
-    sidepanel.style.width = "250px";
+
+  <script>
+  function openNav() {
+    document.getElementById("mySidepanel").style.width = "250px";
   }
-}
-
-// Close the hamburger menu and side panel if clicked outside
-window.onclick = function(event) {
-  const hamburgerMenu = document.getElementById("hamburgerMenu");
-  const sidepanel = document.getElementById("mySidepanel");
-  if (event.target !== hamburgerMenu && event.target !== sidepanel) {
-    hamburgerMenu.style.display = "none";
-    sidepanel.style.width = "0";
+  
+  function closeNav() {
+    document.getElementById("mySidepanel").style.width = "0";
   }
-}
-</script>
+  </script>
+
+{% endblock content %}
