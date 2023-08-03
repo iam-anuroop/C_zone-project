@@ -42,9 +42,9 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['16.16.57.3','www.czone.cloud','czone.cloud','127.0.0.1:8000']
 
-CSRF_TRUSTED_ORIGINS = ['https://czone.cloud']
+CSRF_TRUSTED_ORIGINS = ['https://www.czone.cloud','https://czone.cloud']
 # Application definition
 
 INSTALLED_APPS = [
