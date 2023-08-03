@@ -18,7 +18,7 @@ class HotelManager(BaseUserManager):
 # model for creating hotels 
 
 class HotelDetails(AbstractBaseUser):
-    user_id = models.ForeignKey(UserDetails, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(UserDetails, on_delete=models.SET_NULL,null=True)
     hotel_name = models.CharField(max_length=255)
     hotel_email = models.EmailField(unique=True,null=False)
     hotel_registration_number = models.CharField(max_length=255)
