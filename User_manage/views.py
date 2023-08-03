@@ -298,9 +298,10 @@ def Profileupdate(request):
 
 # delete user account 
 def Userdelete(request):
-    print(request.user)
-    user = request.user
-    user.delete()
+    if request.user:
+        user = request.user
+        user.delete()
+        return redirect('home')
     return render(request,'account/userprofile.html')
 
 
