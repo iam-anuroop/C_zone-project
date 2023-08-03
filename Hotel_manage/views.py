@@ -328,12 +328,18 @@ def Payment_view (request,booking_id=0,room_id=0):
     booking = get_object_or_404(BookingDetails,id=booking_id)
     room = get_object_or_404(Roomtype, id=room_id)
 
+    c_in_date = booking.check_in_date
+    c_out_date = booking.check_out_date
+
+    total_days = (c_out_date - c_in_date).days
+
 
     grand_total = 0
     total = room.price
     
     tax = (2 * total)/100
-    grand_total = total + tax
+    grand_total = (total + tax)*total_days
+    print(grand_total,type(grand_total))
 
     client = razorpay.Client(auth=(settings.RAZOR_KEY_ID,settings.RAZOR_KEY_SECRET))
     payment = client.order.create({'amount':int(grand_total)*100 , 'currency':'INR' , 'payment_capture':1 })
