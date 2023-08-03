@@ -139,7 +139,7 @@ def login_view(request):
                 else:
                     messages.error(request, 'This Email doesnt have an account please register')
             except:
-                messages.error(request,'Something went wrong')
+                messages.error(request,'This Email doesnt have an account please register')
     return render(request, 'account/login.html')
 
 
