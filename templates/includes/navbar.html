@@ -84,7 +84,7 @@
   .sidepanel  {
     width: 0;
     position: fixed;
-    z-index: 1;
+    z-index: 8;
     height: auto;
     top: 10px;
     right: 10px;
@@ -159,8 +159,12 @@
   <div class="nav_links">
     <a href="{% url 'home' %}" class="page_link">Hotels</a>
     <a href="{% url 'rooms' %}" class="page_link">Rooms</a>
-    
+    <form action="{% url 'search' %}" class="search_form">
+      <input type="search" name="search" class="search_input" placeholder="search...">
+      <button type="submit" class="search_button">Search</button>
+    </form>
   </div>
+  
   <div class="user_icons">
     {% if user.is_authenticated %}
     <div class="user_icon" onclick="return confirm('Are you sure you want to logout?')" ><a href='{% url 'logout' %}'><i class="fa-solid fa-right-from-bracket"></i></a></div>
@@ -252,7 +256,6 @@
     {% else %}
     <li><a href='{% url 'registration' %}'>Account</a></li>
     {% endif %}
-    <li><a href="{% url 'mainhome' %}">Home</a></li>
      <li><a href="{% url 'home' %}">Hotel</a></li>
       <li><a href="{% url 'rooms' %}">Rooms</a></li>
       <li><a href="{% url 'profile' %}">Profile</a></li>
@@ -293,8 +296,8 @@ body {
   border:none;
   width:30px;
   height:30px;
-  cursor:pointer; 
   color:white;
+  cursor:pointer; 
   outline:0;
   z-index: 2;
 }
