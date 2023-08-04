@@ -1,45 +1,44 @@
 {% extends 'base.html' %}
-
 {% block content %}
-
-{% include 'includes/navbar.html' %} 
+{% include 'includes/navbar.html' %}
 
 <div class="registration-form-container">
   <div class="form-box">
-    <form method="POST" enctype="multipart/form-data" action="{% url 'hotelregistration' %}"  >
+    <h3>Registration for Hotel</h3>
+    <form method="POST" enctype="multipart/form-data" action="{% url 'hotelregistration' %}">
       {% csrf_token %}
       {% load widget_tweaks %}
 
       <div class="form-grid">
         <div class="form-field">
-          {{ form.hotel_name|attr:'placeholder:Hotel Name' }}
+          {{ form.hotel_name|attr:'placeholder:Name' }}
         </div>
         <div class="form-field">
-          {{ form.hotel_email|attr:'placeholder:Hotel Email' }}
+          {{ form.hotel_email|attr:'placeholder:Email' }}
         </div>
         <div class="form-field">
-          {{ form.hotel_registration_number|attr:'placeholder:Hotel Registration Number' }}
+          {{ form.hotel_registration_number|attr:'placeholder:Registration Number' }}
         </div>
         <div class="form-field">
-          {{ form.hotel_contact_number|attr:'placeholder:Hotel Contact Number' }}
+          {{ form.hotel_contact_number|attr:'placeholder:Contact Number' }}
         </div>
         <div class="form-field">
-          {{ form.hotel_address|attr:'placeholder:Hotel Address' }}
+          {{ form.hotel_address|attr:'placeholder:Address' }}
         </div>
         <div class="form-field">
-          {{ form.hotel_location|attr:'placeholder:Hotel Location' }}
+          {{ form.hotel_location|attr:'placeholder:Location' }}
         </div>
         <div class="form-field">
-          {{ form.district|attr:'placeholder:Hotel District' }}
+          {{ form.district|attr:'placeholder:District' }}
         </div>
         <div class="form-field">
-          {{ form.state|attr:'placeholder:Hotel State' }}
+          {{ form.state|attr:'placeholder:State' }}
         </div>
         <div class="form-field">
-          {{ form.city|attr:'placeholder:Hotel City' }}
+          {{ form.city|attr:'placeholder:City' }}
         </div>
         <div class="form-field">
-          {{ form.pin_code|attr:'placeholder:Hotel Pin Code' }}
+          {{ form.pin_code|attr:'placeholder:PinCode' }}
         </div>
         <div class="form-field">
           {{ form.password|attr:'placeholder:Set Password' }}
@@ -48,18 +47,18 @@
           <input class='confirm_password_hotel' name='confirmpassword' placeholder='confirm password'>
         </div>
         <div class="form-field">
-          {{ form.hotel_profile|attr:'placeholder:Hotel Profile' }}
+          {{ form.hotel_profile|attr:'placeholder:Image' }}
         </div>
       </div>
 
       <div class="form-group col-md-6">
         {% for message in messages %}
-            {% if message.tags == "success" %}
-                <div class="text-success alert alert-success font-weight-bold" role="alert" id="message-alert">{{message}}</div>
-            {% endif %}
-            {% if message.tags == "error" %}
-                <div class="text-danger alert alert-danger font-weight-bold" role="alert" id="message-alert">{{message}}</div>
-            {% endif %}
+        {% if message.tags == "success" %}
+        <div class="text-success alert alert-success font-weight-bold" role="alert" id="message-alert">{{message}}</div>
+        {% endif %}
+        {% if message.tags == "error" %}
+        <div class="text-danger alert alert-danger font-weight-bold" role="alert" id="message-alert">{{message}}</div>
+        {% endif %}
         {% endfor %}
       </div>
 
@@ -69,17 +68,6 @@
 
   <p>Manage your hotel <a href='{% url 'hotellogin' %}'>Click here to login</a></p>
 </div>
-
-<script>
-  setTimeout(function() {
-    var messageAlerts = document.querySelectorAll('#message-alert');
-    if (messageAlerts) {
-      messageAlerts.forEach(function(alert) {
-        alert.style.display = 'none';
-      });
-    }
-  }, 8000);
-</script>
 
 <style>
   body {
@@ -93,7 +81,6 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    padding: 20px;
   }
 
   .form-box {
@@ -102,13 +89,19 @@
     border-radius: 5px;
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 400px; /* Set maximum width for the form box */
+    width: 100%;
   }
 
   .form-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr); /* Initial grid with 4 columns */
     grid-gap: 15px;
     margin-bottom: 15px;
+  }
+
+  .form-field {
+    grid-column: span 2; /* Each field occupies two columns */
   }
 
   .form-field input[type="text"],
@@ -122,7 +115,8 @@
     outline: none;
     transition: border-color 0.3s ease;
   }
-  .confirm_password_hotel{
+
+  .confirm_password_hotel {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -176,6 +170,22 @@
     background-color: #f8d7da;
     color: #721c24;
     border-color: #f5c6cb;
+  }
+
+  @media (max-width: 768px) {
+    /* On smaller screens, change the grid layout */
+    .form-grid {
+      grid-template-columns: repeat(1, 1fr); /* One column */
+    
+    }
+
+    .registration-form-container{
+      margin-top:150px;
+    }
+
+    .form-field {
+      grid-column: span 1; /* Each field occupies one column */
+    }
   }
 </style>
 

@@ -1,84 +1,180 @@
 {% extends 'base.html' %}
 {% block content %}
-
-
-
+{% include 'includes/navbar.html' %}
 
 <section class="section-content padding-y">
+    <div class="container">
+        <div class="card mx-auto" style="max-width: 520px; margin-top: 40px;">
+            <article class="card-body">
+                <header class="mb-4 text-center">
+                    <h4 class="card-title">Sign up</h4>
+                </header>
+                <form action="{% url 'registration'%}" method="POST">
+                    {% csrf_token %}
+                    {% load widget_tweaks %}
 
-    <!-- ============================ COMPONENT REGISTER   ================================= -->
-        <div class="card mx-auto" style="max-width:520px; margin-top:40px;">
-          <article class="card-body">
-            <header class="mb-4"><h4 class="card-title">Sign up</h4></header>
-            <form action="{% url 'registration'%}" method="POST">
-                {% csrf_token %}
-                {% load widget_tweaks %}
-                
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <label for="{{form.fullname.id_for_label}}">Full name</label>
-                           {{ form.fullname|attr:"placeholder:fullname..." }}
-                        </div>
-                        <div class="form-row"> 
-                            <div class="form-group col-md-6">
-                              <label for="{{form.email.id_for_label}}">Email</label>
-                               {{ form.email|attr:"placeholder:email..." }}
-                            </div> 
-                        </div>
+                    <div class="form-group">
+                        <label for="{{form.fullname.id_for_label}}">Full name</label>
+                        {{ form.fullname|attr:"class:form-control" }}
                     </div>
-                     
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <label for="{{form.username.id_for_label}}">Username</label>
-                           {{ form.username|attr:"placeholder:username..." }}
-                        </div> 
-                        <div class="form-group col-md-6">
-                          <label for="{{form.phone.id_for_label}}">Phone Number</label>
-                           {{ form.phone|attr:"placeholder:phone number..." }}
-                        </div> 
-                    </div> 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="{{form.password.id_for_label}}">Create password</label>
-                            {{ form.password|attr:"placeholder:password..." }}
-                        </div> 
-                        <div class="form-group col-md-6">
-                            <label for="{{form.confirmpassword.id_for_label}}">Confirm Password</label>
-                            {{ form.confirmpassword|attr:"placeholder:password..."}}
-                        </div> 
+                    <div class="form-group">
+                        <label for="{{form.email.id_for_label}}">Email</label>
+                        {{ form.email|attr:"class:form-control" }}
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group">
+                        <label for="{{form.username.id_for_label}}">Username</label>
+                        {{ form.username|attr:"class:form-control" }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{form.phone.id_for_label}}">Phone Number</label>
+                        {{ form.phone|attr:"class:form-control" }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{form.password.id_for_label}}">Create password</label>
+                        {{ form.password|attr:"class:form-control" }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{form.confirmpassword.id_for_label}}">Confirm Password</label>
+                        {{ form.confirmpassword|attr:"class:form-control" }}
+                    </div>
+                    <div class="form-group text-center">
                         {% for message in messages %}
                             {% if message.tags == "success" %}
-                                <div class="text-success alert alert-success font-weight-bold" role="alert" id="message-alert">{{message}}</div>
+                                <div class="text-success alert alert-success font-weight-bold" role="alert"
+                                    id="message-alert">{{message}}</div>
                             {% endif %}
                             {% if message.tags == "error" %}
-                                <div class="text-danger alert alert-danger font-weight-bold" role="alert" id="message-alert">{{message}}</div>
+                                <div class="text-danger alert alert-danger font-weight-bold" role="alert"
+                                    id="message-alert">{{message}}</div>
                             {% endif %}
                         {% endfor %}
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block btn-dark"> Register  </button>
+                        <button type="submit" class="btn btn-primary btn-block btn-dark">Register</button>
                     </div>
                 </form>
-            </article><!-- card-body.// -->
-        </div> <!-- card .// -->
-        <p class="text-center mt-4">Have an account?<a href="{% url 'login' %}">Log In</a></p>
-        <br><br>
+            </article>
+        </div>
+        <p class="text-center mt-4">Have an account? <a href="{% url 'login' %}">Log In</a></p>
+        <p class="text-center mt-4">Go back to home<a href="{% url 'mainhome' %}">Home</a></p>
 
-    <!-- ============================ COMPONENT REGISTER  END.// ================================= -->
+    </div>
+</section>
 
-    </section>
-
-
-<script>
-    setTimeout(function() {
-        var messageAlerts = document.querySelectorAll('#message-alert');
-        if (messageAlerts) {
-            messageAlerts.forEach(function(alert) {
-                alert.style.display = 'none';
-            });
+<style>
+    @media (max-width: 576px) {
+        .card {
+            max-width: 100%;
+            border-radius: 0;
         }
-    }, 8000);
-</script>
+        .form-row {
+            flex-direction: column;
+        }
+        .form-group {
+            width: 100%;
+        }
+    }
+
+    /* Custom CSS */
+    body {
+        background-color: #f5f5f5;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .registration-form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        padding: 20px;
+    }
+
+    .form-box {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    .form-field input[type="text"],
+    .form-field input[type="email"],
+    .form-field input[type="password"],
+    .form-field textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s ease;
+    }
+
+    .confirm_password_hotel {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s ease;
+    }
+
+    .form-field input[type="text"]:focus,
+    .form-field input[type="email"]:focus,
+    .form-field input[type="password"]:focus,
+    .form-field textarea:focus {
+        border-color: #80bdff;
+    }
+
+    .btn {
+        padding: 10px 15px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        outline: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #45a049;
+    }
+
+    a {
+        color: #4CAF50;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .alert {
+        margin-bottom: 15px;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border-color: #c3e6cb;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border-color: #f5c6cb;
+    }
+</style>
+
 {% endblock content %}
+
+
+

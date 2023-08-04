@@ -50,6 +50,11 @@
     display: flex;
     color: cyan;
   }
+  .search_form{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
   .search_input{
     background: transparent;
     border: 2px solid cyan;
@@ -172,7 +177,9 @@
       <input type="search" name="search" class="search_input" placeholder="search...">
       <button type="submit" class="search_button">Search</button>
     </form>
-    <div class="c_zone_title"><h3>C_zone</h3></div>
+    <div class="c_zone_title">
+      <div><a class='brand' href='{% url 'mainhome' %}'><h3>C_zone</h3></a></div>
+    </div>
   </div>
 </nav>
 
@@ -240,12 +247,12 @@
  
  <div class="sidebar" id='sidebar'>
    <ul>
-    <li><a href="{% url 'mainhome' %}">Home</a></li>
     {% if user.is_authenticated %}
     <li onclick="return confirm('Are you sure you want to logout?')" ><a href='{% url 'logout' %}'>Logout</a></li>
     {% else %}
     <li><a href='{% url 'registration' %}'>Account</a></li>
     {% endif %}
+    <li><a href="{% url 'mainhome' %}">Home</a></li>
      <li><a href="{% url 'home' %}">Hotel</a></li>
       <li><a href="{% url 'rooms' %}">Rooms</a></li>
       <li><a href="{% url 'profile' %}">Profile</a></li>
