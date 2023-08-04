@@ -5,14 +5,14 @@
 <form class='filterform' action = "{% url 'filter' %}" method="get">
       <select class="filter form-control" name="price_filter" id="price_filter">
         <option value="">Filter</option>
-        <option value="0-1000">Less than $1000</option>
-        <option value="1000-2000">$1000 - $2000</option>
-        <option value="2000-3000">$2000 - $3000</option>
-        <option value="3000-1000000">More than $3000 </option>
+        <option value="0-1000">Less than 1000</option>
+        <option value="1000-2000">1000 - 2000</option>
+        <option value="2000-3000">2000 - 3000</option>
+        <option value="3000-1000000">More than 3000 </option>
         <!-- Add more price ranges as needed -->
       </select>
     </div>
-    <button type="submit" class="btn_filter btn btn-primary">Filter</button>
+    <button type="submit" class="btn_filter btn btn-primary">Apply</button>
 </form>
 
 
@@ -38,10 +38,13 @@
 </div>
 
 <style>
+  
   .btn_filter{
     background: transparent;
-    color: cyan;
-    border: 1px solid cyan;
+    color: white;
+    border: 1px solid white;
+    z-index: 6;
+
   }
   .rooms_main_div{
     display:flex;
@@ -54,7 +57,7 @@
     .filterform{
         display:flex;
         position: fixed;
-        z-index: 1;
+        z-index: 6;
         right: 180px;
         top: 25px;
     }
@@ -67,6 +70,55 @@
       object-fit: cover; /* Ensure the image retains its aspect ratio while covering the entire container */
       border-radius: 5px; /* Optionally add border-radius to give the image rounded corners */
     }
+
+    @media(max-width : 1000px){
+    .filterform{
+        display:flex;
+        position: fixed;
+        z-index: 8;
+        right: 150px;
+        top: 25px;
+    }
+    .filter{
+        width:80px;
+        height: 40px;
+    }
+  }
+  @media(max-width : 730px){
+    .filterform{
+        display:flex;
+        position: fixed;
+        z-index: 8;
+        right: 130px;
+        top: 25px;
+    }
+    .filter{
+        width:80px;
+        height: 40px;
+
+    }
+  }
+  @media(max-width : 680px){
+    .filterform{
+        display:flex;
+        flex-direction: column;
+        position: fixed;
+        z-index: 8;
+        right: 15px;
+        top: 80px;
+        width: 60px;
+    }
+    .filter{
+        width:80px;
+        height: 40px;
+
+    }
+    .btn_filter{
+    background: transparent;
+    color: black;
+    border: 1px solid black;
+    z-index: 6;
+  }
 </style>
 
 
