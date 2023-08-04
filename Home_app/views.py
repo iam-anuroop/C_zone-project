@@ -31,10 +31,15 @@ def Searchotel(request):
         search = request.GET['search']
         list_hotels = HotelDetails.objects.filter(Q(hotel_name__icontains=search) | Q(city__icontains=search) | Q(state__icontains=search),is_registerd = True,is_confirmed = True)
 
-        return render(request,'pages/home.html',{'hotels':list_hotels})
+
+        if not list_hotels.exists():
+            return redirect('no_hotel')
+        
     else:
         list_hotels = HotelDetails.objects.all()
-        return render(request,'pages/home.html',{'hotels':list_hotels})
+    
+    
+    return render(request,'pages/home.html',{'hotels':list_hotels})
 
 
 
@@ -64,7 +69,21 @@ def Filter_room(request):
     if price_filter:
         min_price, max_price = price_filter.split('-')
         list_rooms = Roomtype.objects.filter(price__gte=min_price,price__lte=max_price)
+
+        if not list_rooms.exists():
+            return redirect('no_hotel')
+        
+
     return render(request,'pages/rooms.html',{'rooms':list_rooms,'booked_room_ids':booked_room_ids})
     
+
+
+    
+
+def no_hotel_view(request):
+
+    return render(request,'pages/no_hotels.html')
+
+
 
 # Create your views here.
