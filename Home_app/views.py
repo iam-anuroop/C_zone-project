@@ -82,7 +82,7 @@ def Filter_room(request):
 
 def no_hotel_view(request):
 
-    return render(request,'pages/no_hotels.html')
+    return render(request,'pages/no_hotel.html')
 
 
 
