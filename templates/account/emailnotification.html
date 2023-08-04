@@ -1,42 +1,41 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container text-center">
-    <div class="row justify-content-center">
-        <div class="text-center">
-            <h1>Email Notification Page</h1>
-            <h4>Verify Email</h4>
-            <div class="icon-container">
-                <i class="icon_tik fas fa-check-circle fa-5x"></i>
-            </div>
-            <h2 class="message-text">Email sent successfully!</h2>
-        </div>
-    </div>
+
+<div class="container mt-5">
+  <div class="text-center">
+    <i class="fa fa-check-circle fa-5x text-success" aria-hidden="true"></i>
+    <h2>Email Sent!</h2>
+    <p>We have sent an email to your email address. Please check your inbox to continue.</p>
+  </div>
 </div>
-{% endblock content %}
 
 <style>
-
-  .container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  body {
+    background-color: #fff; /* Changed background color to white */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
 
-  .icon-container {
-    font-size: 100px;
+  .fa-check-circle {
     margin-bottom: 20px;
   }
 
-
-  .message-text {
-    font-size: 24px;
-    font-weight: bold;
+  h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
   }
 
-  /* Font Awesome icons (make sure to include the Font Awesome CSS link in your base.html) */
-  .fa-check-circle:before {
-    content: "\f058";
+  p {
+    font-size: 18px;
+    color: #777;
   }
+
+  /* You can add additional styles as needed */
 </style>
+
+{% endblock content %}
