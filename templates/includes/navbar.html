@@ -133,6 +133,14 @@
   .sub2{
     display: none;
   }
+  .brand{
+    color: yellow;
+    text-decoration:none;
+  }
+  .brand:hover{
+    color: yellow;
+    text-decoration:none;
+  }
   
 </style>
 
@@ -141,7 +149,7 @@
   <div class = 'sub1'>
     <div class="sub1sub">
   <div class="c_zone_title">
-    <div><h3>C_zone</h3></div>
+    <div><a class='brand' href='{% url 'mainhome' %}'><h3>C_zone</h3></a></div>
   </div>
   <div class="nav_links">
     <a href="{% url 'home' %}" class="page_link">Hotels</a>
@@ -190,6 +198,22 @@
       padding-left: 20px;
       padding-right: 20px;
     }
+    .search_input{
+      background: transparent;
+      border: 2px solid cyan;
+      color: rgba(237, 252, 252, 0.6);
+      text-align: center;
+      border-radius: 8px;
+      width: 130px;
+      height: 30px;
+    }
+    .search_button{
+
+      border-radius: 5px;
+      background: transparent;
+      color: cyan;
+      border: 2px solid cyan;
+    }
   }
 
   </style>
@@ -197,7 +221,7 @@
   
   <div id="mySidepanel" class="sidepanel">
     <div class="closebtn_div" ><a href="javascript:void(0)" class="closebtn" title="close" onclick="closeNav()">×</a></div>
-    <div class="sidepanel_a" ><a href="{% url 'userprofile' %}">Profile</a></div>
+    <div class="sidepanel_a" ><a href="{% url 'profile' %}">Profile</a></div>
     <div class="sidepanel_a" ><a href="{% url 'yourbookings' %}">Your bookings</a></div>
     <div class="sidepanel_a" ><a href="{% url 'hotellogin' %}">Manage hotel</a></div>
   </div>
@@ -216,6 +240,7 @@
  
  <div class="sidebar" id='sidebar'>
    <ul>
+    <li><a href="{% url 'mainhome' %}">Home</a></li>
     {% if user.is_authenticated %}
     <li onclick="return confirm('Are you sure you want to logout?')" ><a href='{% url 'logout' %}'>Logout</a></li>
     {% else %}
@@ -223,7 +248,7 @@
     {% endif %}
      <li><a href="{% url 'home' %}">Hotel</a></li>
       <li><a href="{% url 'rooms' %}">Rooms</a></li>
-      <li><a href="{% url 'userprofile' %}">Profile</a></li>
+      <li><a href="{% url 'profile' %}">Profile</a></li>
     <li><a href="{% url 'yourbookings' %}">Your bookings</a></li>
     <li><a href="{% url 'hotellogin' %}">Manage hotel</a></li>
 
@@ -262,6 +287,7 @@ body {
   width:30px;
   height:30px;
   cursor:pointer; 
+  color:white;
   outline:0;
   z-index: 2;
 }

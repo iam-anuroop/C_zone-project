@@ -253,6 +253,15 @@ def invoice_view(request, booking_id):
 
 
 
+@login_required(login_url='login')
+def profile_view(request):
+    user=request.user
+
+
+    return render(request,'account/profile.html',{'user':user})
+
+
+
 
 #user profile crud operation for updating and deleting their account 
 @login_required(login_url='login')
