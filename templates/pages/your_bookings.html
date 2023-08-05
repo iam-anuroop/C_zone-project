@@ -1,50 +1,67 @@
 {% extends 'base.html' %}
-
 {% block content %}
 
 {% include 'includes/navbar.html' %}
 
-<div class="container">
+<div class="container mt-5 pt-4">
   <div class="incomplete-bookings">
-    <h2>Incomplete Bookings</h2>
-    <table>
-      <tbody>
-        {% for book in books %}
-        <tr>
-          <td>{{ book.hotel.hotel_name }}</td>
-          <td>{{ book.room_type.roomtype }}</td>
-          <td>{{ book.room_type.price }}</td>
-          <td class="image-cell"><img class="image" src="{{ MEDIA_URL }}{{ book.room_type.photo.url }}" alt="Profile Image"></td>
-          <td>
-            {% if book.room_type.id in booked_room_ids %}
-            <span class="not-available">Not available</span>
-            {% else %}
-            <a href="{% url 'payment' book.id book.room_type.id %}" class="btn btn-success">Book now</a>
-            {% endif %}
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <h2>Complete your Bookings</h2>
+    <div class="booking-table-box">
+      <table>
+        <thead>
+          <tr>
+            <th>Hotel Name</th>
+            <th>Room Type</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for book in books %}
+          <tr>
+            <td>{{ book.hotel.hotel_name }}</td>
+            <td>{{ book.room_type.roomtype }}</td>
+            <td>{{ book.room_type.price }}</td>
+            <td class="image-cell"><img class="image" src="{{ MEDIA_URL }}{{ book.room_type.photo.url }}" alt="Profile Image"></td>
+            <td>
+              {% if book.room_type.id in booked_room_ids %}
+              <span class="not-available">Not available</span>
+              {% else %}
+              <a href="{% url 'payment' book.id book.room_type.id %}" class="btn btn-success">Book now</a>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <div class="completed-bookings">
-    <h2>Completed Bookings</h2>
+    <h2>Your Bookings</h2>
     {% for book in booking %}
     <div class="booking-info">
-      <h3>{{ book.hotel.hotel_name }}</h3>
-      <h3>{{ book.room_type }}</h3>
-      <a href="{% url 'invoice' book.id %}" class="btn btn-success">Download Invoice</a>
+      <div>
+        <h3>{{ book.hotel.hotel_name }}</h3>
+        <p>{{ book.room_type }}</p>
+      </div>
+      <div>
+        <a href="{% url 'invoice' book.id %}" class="btn btn-success">Download Invoice</a>
+      </div>
     </div>
     {% endfor %}
   </div>
 </div>
 
 <style>
+  /* Custom CSS */
   body {
-    background-color: maroon;
-    color: white;
+    background-color: #f5f5f5; /* Changed background color to a light gray */
+    color: #333; /* Set a darker text color for better readability */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
   }
 
   .container {
@@ -61,6 +78,14 @@
   .incomplete-bookings h2,
   .completed-bookings h2 {
     margin-bottom: 20px;
+  }
+
+  .booking-table-box {
+    background-color: #fff; /* Changed background color to white */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    overflow-x: auto; /* Enable horizontal scrolling for small screens */
   }
 
   table {
@@ -114,9 +139,42 @@
     padding: 15px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Responsive Styles */
+
+  @media (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+
+    .image {
+      width: 100px;
+      height: 70px;
+    }
+
+    .booking-info {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .booking-info div {
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      padding: 6px 10px;
+      font-size: 14px;
+    }
+
+    /* Adjust table font size for small screens */
+    table {
+      font-size: 12px;
+    }
   }
 </style>
 

@@ -240,6 +240,30 @@ def Roomtype_view(request):
 
 
 
+
+
+# roomtyp update view
+def Roomtype_edit_view(request,room_id):
+
+    room = get_object_or_404(Roomtype,id=room_id)
+
+    form = Roomtypeform(instance=room)
+
+
+    if request.method == "POST":
+        form = Roomtypeform(request.POST,instance=room)
+        if form.is_valid():
+            form.save()
+            return redirect('roomtypeupdate')
+        else:
+            return HttpResponse('form is not valid')
+
+    return render(request,'hotel_account/roomtype_update.html',{'form':form})
+
+
+
+
+
 # hotel_rooms and price page view
 @login_required(login_url='login')
 def Hotel_rooms_view(request,hotel_id):

@@ -9,6 +9,7 @@ urlpatterns = [
     path('hotel_home/',views.Hotelhome,name='hotelhome'),
     path('hotel_logout/',views.Hotellogout,name='hotellogout'),
     path('roomtype/',views.Roomtype_view,name='roomtypeupdate'),
+    path('roomtype_edit/<int:room_id>',views.Roomtype_edit_view,name='roomtype_edit'),
     path('hotelrooms/<int:hotel_id>/',views.Hotel_rooms_view,name='hotelrooms'),
     path('hotelbook/<int:hotel_id>/<int:room_id>',views.hotel_book,name='hotelbook'),
     path('payment/<int:booking_id>/<int:room_id>',views.Payment_view,name='payment'),

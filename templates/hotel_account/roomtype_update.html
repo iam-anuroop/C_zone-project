@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="form-container">
+  <form method="post"> {# Make sure you have 'method="post"' in the form tag #}
+    {% csrf_token %} {# Add CSRF token for security #}
+    {{form.as_p}}
+    <div class="form-group col-md-6">
+      {% for message in messages %}
+        {% if message.tags == "success" %}
+          <div class="text-success alert alert-success font-weight-bold" role="alert" id="message-alert">{{message}}</div>
+        {% endif %}
+        {% if message.tags == "error" %}
+          <div class="text-danger alert alert-danger font-weight-bold" role="alert" id="message-alert">{{message}}</div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <button type="submit" class="btn-submit">Submit</button>
+  </form>
+</div>
+
+<script>
+  setTimeout(function() {
+    var messageAlerts = document.querySelectorAll('#message-alert');
+    if (messageAlerts) {
+      messageAlerts.forEach(function(alert) {
+        alert.style.display = 'none';
+      });
+    }
+  }, 8000);
+</script>
+
+<style>
+  .form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7; /* Add a background color */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a box shadow */
+    position: relative; /* Set position to relative for button positioning */
+  }
+
+  /* Style the back button */
+
+
+  /* Style the form fields */
+  input[type="text"],
+  input[type="email"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  /* Style the form buttons */
+  .form-group button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* Media query for responsiveness */
+  @media (max-width: 768px) {
+    .form-container {
+      max-width: 100%;
+    }
+  }
+</style>
+
+{% endblock content %}

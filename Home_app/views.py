@@ -10,7 +10,6 @@ from Hotel_manage.models import BookingDetails
 def main_home_view(request):
 
 
-    
     return render ( request,'pages/main_home.html')
 
 

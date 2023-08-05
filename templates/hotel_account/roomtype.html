@@ -18,18 +18,20 @@
   <div class='ml-5'>
     <table class='table'>
       <tr>
-        <th colspan='3' style="color: white; text-align: center;">Rooms that are added</th>
+        <th colspan='4' style="color: white; text-align: center;">Rooms that are added</th>
       </tr>
       <tr>
         <th>Room Type</th>
         <th>capacity</th>
         <th>Price</th>
+        <th>Edit</th>
       </tr>
       {% for data in datas %}
         <tr>
           <td>{{data.roomtype}}</td>
           <td>{{data.capacity}}</td>
           <td>{{data.price}} Rs</td>
+          <td><a href={% url 'roomtype_edit' data.id %}><i class="fa-solid fa-file-pen"></i></a></td>
         </tr>
       {% endfor %}
     </table>
